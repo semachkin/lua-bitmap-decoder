@@ -1,2 +1,28 @@
-# lua-bitmap-decoder
-Bmp image decoder for lua
+# Использование
+test.lua
+```lua
+require'bmp'
+
+local forest = bmpDecode'forest.bmp'
+
+print(forest)
+```
+____
+Результат выполнения bmpDecode будет содержать такую структуру
+```
+{
+  width = 587, ширина
+  height = 786, высота
+  rows = {
+    [1] = {
+      [1] = {
+        R = 255, красный
+        G = 255, зелёный
+        B = 255  синий
+      },
+      ...
+    },
+    ...
+  }
+}
+```
