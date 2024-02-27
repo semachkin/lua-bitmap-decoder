@@ -65,40 +65,40 @@ local function readLong(stream)   return bytesToInt(stream:read(LONG), true)  en
 function bmpDecode(path)
     local result = {}
 
-    local file<close> = io.open(path, 'rb')
+    local file = io.open(path, 'rb')
 
     if file:read(WORD) ~= '\66\77' then error'not a bitmap' end
 
-    local size<const> = readInt32(file)
+    local size = readInt32(file)
     file:read(DWORD)
-    local mappoint<const> = readUint32(file)
+    local mappoint = readUint32(file)
 
     local dibInfo = {}
 
-    local dibSize<const> = readUint32(file)
+    local dibSize = readUint32(file)
     dibInfo.size = dibSize
 
     if dibSize == BITMAPV5HEADER then
-        local v5Width      <const> = readLong  (file)
-        local v5Height     <const> = readLong  (file)
-        local v5Planes     <const> = readUint16(file)
-        local v5BitCount   <const> = readUint16(file)
-        local v5Compression<const> = readUint32(file)
-        local v5ImageSize  <const> = readUint32(file)
-        local v5XPelsPerMet<const> = readLong  (file)
-        local v5YPelsPerMet<const> = readLong  (file)
-        local v5ClrUser    <const> = readUint32(file)
-        local v5ClrImport  <const> = readUint32(file)
-        local v5RedMask    <const> = readUint32(file)
-        local v5BlueMask   <const> = readUint32(file)
-        local v5GreenMask  <const> = readUint32(file)
-        local v5AlphaMask  <const> = readUint32(file)
-        local v5CStype     <const> = readUint32(file)
+        local v5Width       = readLong  (file)
+        local v5Height      = readLong  (file)
+        local v5Planes      = readUint16(file)
+        local v5BitCount    = readUint16(file)
+        local v5Compression = readUint32(file)
+        local v5ImageSize   = readUint32(file)
+        local v5XPelsPerMet = readLong  (file)
+        local v5YPelsPerMet = readLong  (file)
+        local v5ClrUser     = readUint32(file)
+        local v5ClrImport   = readUint32(file)
+        local v5RedMask     = readUint32(file)
+        local v5BlueMask    = readUint32(file)
+        local v5GreenMask   = readUint32(file)
+        local v5AlphaMask   = readUint32(file)
+        local v5CStype      = readUint32(file)
         file:read(CIEXYZTRIPLE)
         file:read(DWORD * 3)
-        local v5Intent     <const> = readUint32(file)
-        local v5ProfileData<const> = readUint32(file)
-        local v5ProfileSize<const> = readUint32(file)
+        local v5Intent      = readUint32(file)
+        local v5ProfileData = readUint32(file)
+        local v5ProfileSize = readUint32(file)
         file:read(DWORD)
 
         dibInfo.planes      = v5Planes
@@ -113,21 +113,21 @@ function bmpDecode(path)
         dibInfo.greenMask   = v5GreenMask
         dibInfo.alphaMask   = v5AlphaMask
     elseif dibSize == BITMAPV4HEADER then
-        local v4Width       <const> = readLong  (file)
-        local v4Height      <const> = readLong  (file)
-        local v4Planes      <const> = readUint16(file)
-        local v4BitCount    <const> = readUint16(file)
-        local v4Compression <const> = readUint32(file)
-        local v4ImageSize   <const> = readUint32(file)
-        local v4XPerMeter   <const> = readLong  (file)
-        local v4YPerMeter   <const> = readLong  (file)
-        local v4ClrUsed     <const> = readUint32(file)
-        local v4ClrImportant<const> = readUint32(file)
-        local v4RedMask     <const> = readUint32(file)
-        local v4GreenMask   <const> = readUint32(file)
-        local v4BlueMask    <const> = readUint32(file)
-        local v4AlphaMask   <const> = readUint32(file)
-        local v4CStype      <const> = readUint32(file)
+        local v4Width        = readLong  (file)
+        local v4Height       = readLong  (file)
+        local v4Planes       = readUint16(file)
+        local v4BitCount     = readUint16(file)
+        local v4Compression  = readUint32(file)
+        local v4ImageSize    = readUint32(file)
+        local v4XPerMeter    = readLong  (file)
+        local v4YPerMeter    = readLong  (file)
+        local v4ClrUsed      = readUint32(file)
+        local v4ClrImportant = readUint32(file)
+        local v4RedMask      = readUint32(file)
+        local v4GreenMask    = readUint32(file)
+        local v4BlueMask     = readUint32(file)
+        local v4AlphaMask    = readUint32(file)
+        local v4CStype       = readUint32(file)
         file:read(CIEXYZTRIPLE)
         file:read(DWORD * 3)
 
@@ -143,16 +143,16 @@ function bmpDecode(path)
         dibInfo.greenMask   = v4GreenMask
         dibInfo.alphaMask   = v4AlphaMask
     elseif dibSize == BITMAPINFOHEADER then
-        local width       <const> = readLong  (file)
-        local height      <const> = readLong  (file)
-        local planes      <const> = readUint16(file)
-        local bitCount    <const> = readUint16(file)
-        local compression <const> = readUint32(file)
-        local imageSize   <const> = readUint32(file)
-        local xPerMeter   <const> = readLong  (file)
-        local yPerMeter   <const> = readLong  (file)
-        local crlUsed     <const> = readUint32(file)
-        local crlImportant<const> = readUint32(file)
+        local width        = readLong  (file)
+        local height       = readLong  (file)
+        local planes       = readUint16(file)
+        local bitCount     = readUint16(file)
+        local compression  = readUint32(file)
+        local imageSize    = readUint32(file)
+        local xPerMeter    = readLong  (file)
+        local yPerMeter    = readLong  (file)
+        local crlUsed      = readUint32(file)
+        local crlImportant = readUint32(file)
 
         dibInfo.planes      = planes
         dibInfo.csType      = csType
@@ -162,10 +162,10 @@ function bmpDecode(path)
         dibInfo.compression = compression
         dibInfo.imageSize   = imageSize
     elseif dibSize == BITMAPCOREHEADER then
-        local width   <const> = readInt16 (file)
-        local height  <const> = readInt16 (file)
-        local planes  <const> = readUint16(file)
-        local bitCount<const> = readUint16(file)
+        local width    = readInt16 (file)
+        local height   = readInt16 (file)
+        local planes   = readUint16(file)
+        local bitCount = readUint16(file)
 
         dibInfo.planes   = planes
         dibInfo.width    = width
@@ -233,6 +233,8 @@ function bmpDecode(path)
     end
 
     result.rows = pixels
+
+    file:close()
 
     return result
 end
